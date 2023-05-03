@@ -1,9 +1,15 @@
-import Pessoa from "@/components/Pessoa";
-import { useState } from "react";
+import { useEffect, useState } from 'react';
 import comAutorizacao from "@/hoc/comAutorizacao";
+import Pessoa from "@/components/Pessoa";
 
 function Home() {
   const [idade, setIdadeSergio] = useState(17);
+  const [color, setColor] = useState('blue')
+
+  useEffect(() => {
+    setColor('red')
+  }, [])
+
   //Conceito de looping
   const pessoas = [
     {
@@ -24,18 +30,18 @@ function Home() {
     console.log('aumentaIdadeSergio')
     setIdadeSergio(1 + idade)
   }
+
   return (
     //Variavel com a env publica
     <>
       <div>
-        <h2>Ola mundo! {process.env.NEXT_PUBLIC_TESTE}</h2>
-
-
+        <h1 className={`title ${color}`}>
+          Hello World!
+        </h1>
+        {process.env.NEXT_PUBLIC_TESTE}
       </div>
       <Pessoa nome='Sergio' idade={idade} />
       <Pessoa nome='kennedy' idade={35} />
-
-
 
       {pessoas.map(({ nomePessoa, idadePessoa }, index) => {
         return <Pessoa
